@@ -6,9 +6,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 public class HelloController {
+    private float num1, num2;
+    private String operador;
     @FXML
     private Label textoaqui;
-    private Model model = new Model();
 
     @FXML
     protected void manejaBoton(ActionEvent e){
@@ -17,20 +18,32 @@ public class HelloController {
 
     @FXML
     protected void manejaBotonOp(ActionEvent e){
-        if (((Button)e.getSource()).getText()=="="){
-            model.setNum2(Float.parseFloat(textoaqui.getText()));
-            textoaqui.setText(String.valueOf(model.calcular()));
-            System.out.println("hgf");
-        }else{
-            model.setNum1(Float.parseFloat(textoaqui.getText()));
-            model.setOperador(((Button)e.getSource()).getText());
+            num1=(Float.parseFloat(textoaqui.getText()));
+            operador=(((Button)e.getSource()).getText());
             textoaqui.setText("");
-            System.out.println("hgf");
-        }
+    }
 
+    @FXML
+    protected void manejaBotonIgual(){
+        num2=(Float.parseFloat(textoaqui.getText()));
+        textoaqui.setText(String.valueOf(calcular()));
     }
 
     @FXML
     protected void manejaBotonC(){textoaqui.setText("0");
+    }
+    public float calcular(){
+        switch (operador){
+            case "+":
+                return num1+num2;
+            case "-":
+                return num1-num2;
+            case"/":
+                return num1/num2;
+            case"*":
+                return num1*num2;
+            default:
+                return 0;
+        }
     }
 }
